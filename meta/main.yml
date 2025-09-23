@@ -1,5 +1,7 @@
 galaxy_info:
   author: Clément Bruneteau
+  namespace: clembruneteau
+  role_name: apache
   description: Ansible role to install and configure Apache HTTP Server.
 
   issue_tracker_url: https://github.com/clembruneteau/ansible-role-apache/issues
