@@ -41,7 +41,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
-      
+
+      - name: Install test dependencies
+        run: pip3 install ansible molecule molecule-plugins[docker] docker
+
       - name: Run Molecule tests
         run: molecule test
         env:
