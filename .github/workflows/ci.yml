@@ -8,7 +8,6 @@ name: CI
 jobs:
 
   lint:
-
     name: Lint
     runs-on: ubuntu-latest
 
@@ -24,3 +23,28 @@ jobs:
       - name: Lint code
         run: |
           yamllint .
+
+  molecule:
+    name: Molecule
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        distro:
+          - rockylinux10
+          - rockylinux9
+          - rockylinux8
+          - debian13
+          - debian12
+          - debian11
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      
+      - name: Run Molecule tests
+        run: molecule test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO: ${{ matrix.distro }}
