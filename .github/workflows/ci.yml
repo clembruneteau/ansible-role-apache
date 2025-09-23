@@ -10,8 +10,17 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v5
-      - name: Get pwd
-        run: pwd
+      
+      - name: Super-linter
+        uses: super-linter/super-linter@v8.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

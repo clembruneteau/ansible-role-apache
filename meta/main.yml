@@ -1,0 +1,23 @@
+galaxy_info:
+  author: Clément Bruneteau
+  description: Ansible role to install and configure Apache HTTP Server.
+
+  issue_tracker_url: https://github.com/clembruneteau/ansible-role-apache/issues
+
+  license: MIT
+
+  min_ansible_version: '2.1'
+
+  platforms:
+    - name: EL
+      versions:
+        - "7"
+        - "8"
+        - "9"
+    - name: Debian
+      versions:
+        - "bullseye"
+
+  galaxy_tags: ['apache', 'httpd', 'webserver', 'linux']
+
+dependencies: []

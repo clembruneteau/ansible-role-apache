@@ -1,0 +1,29 @@
+---
+argument_specs:
+  main:
+    short_description: The main entry point for the apache role
+    options:
+      apache_security_options:
+        type: "dict"
+        options:
+          servertokens:
+            default: "Prod"
+            choices:
+              - "Full"
+              - "Prod"
+              - "Major"
+              - "Minor"
+              - "Min"
+              - "OS"
+          serversignature:
+            default: "Off"
+            choices:
+              - "On"
+              - "Off"
+              - "EMail"
+          traceenable:
+            default: "Off"
+            choices:
+              - "On"
+              - "Off"
+              - "extended"
