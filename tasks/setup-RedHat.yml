@@ -1,0 +1,7 @@
+---
+- name: Apache - Install packages (RedHat)
+  ansible.builtin.dnf:
+    update_cache: true
+    state: present
+    name: "{{ apache_packages + apache_extra_packages }}"
+    enablerepo: "{{ apache_enablerepo }}"
