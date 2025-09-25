@@ -33,7 +33,6 @@ jobs:
         distro:
           - rockylinux10
           - rockylinux9
-          - rockylinux8
           - debian13
           - debian12
           - debian11
