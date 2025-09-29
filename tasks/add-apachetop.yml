@@ -1,0 +1,36 @@
+---
+
+- name: Apache - Create localhost configuration
+  ansible.builtin.template:
+    src: conf/0_localhost.conf.j2
+    dest: "{{ apache_conf_path }}/0_localhost.conf"
+    mode: "0644"
+  notify: Restart apache
+
+- name: Apache - Enable localhost configuration (Debian)
+  ansible.builtin.file:
+    src: ../conf-available/0_localhost.conf
+    dest: /etc/apache2/conf-enabled/0_localhost.conf
+    state: link
+  notify: Restart apache
+  when: ansible_os_family == 'Debian'
+
+- name: Apache - Install mod_status
+  ansible.builtin.dnf:
+    name: collectd-apache
+    state: present
+    enablerepo: "{{ apache_enablerepo }}"
+  when: ansible_os_family == 'RedHat'
+
+- name: Apache - Get apache-top binary
+  ansible.builtin.unarchive:
+    src: https://github.com/clembruneteau/apache-top/archive/refs/tags/v{{ apachetop_version }}.zip
+    dest: /opt/
+    mode: '0755'
+    remote_src: true
+
+- name: Apache - Create apache-top script
+  ansible.builtin.template:
+    src: opt/apache-top.j2
+    dest: /opt/apache-top
+    mode: '0755'

@@ -1,0 +1,11 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Required packages installation
+      ansible.builtin.package:
+        update_cache: true
+        name: unzip
+        state: present

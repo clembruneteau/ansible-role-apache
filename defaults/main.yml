@@ -8,3 +8,4 @@ apache_security_options:
     traceenable: "Off"
 
 install_apachetop: true
+apachetop_version: '1.0.0'

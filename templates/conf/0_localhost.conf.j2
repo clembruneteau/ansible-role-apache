@@ -1,0 +1,13 @@
+ExtendedStatus on
+<VirtualHost 127.0.0.1:80>
+	SetEnvIf Request_URI "^/server-status$" dontlog
+	SetEnvIf Request_URI "^$OPT_LB_STATS_URI$" dontlog
+	SetEnvIf Request_Method HEAD dontlog
+    
+	CustomLog /var/log/{{ apache_service }}/access_localhost_log combined env=!dontlog
+	
+    <Location /server-status>
+	 SetHandler server-status
+	 Require ip 127.0.0.1
+	</Location>
+</VirtualHost>

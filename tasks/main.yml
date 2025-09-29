@@ -8,6 +8,9 @@
 - name: Apache - Security Configuration
   ansible.builtin.include_tasks: security-configuration.yml
 
+- name: Apache - Add apache-top
+  ansible.builtin.include_tasks: add-apachetop.yml
+
 - name: Apache - Start and enable apache
   ansible.builtin.service:
     name: "{{ apache_service }}"

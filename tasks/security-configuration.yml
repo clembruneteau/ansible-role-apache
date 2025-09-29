@@ -21,13 +21,6 @@
         state: absent
       notify: Restart apache
 
-    - name: Apache - Enable localhost configuration (Debian)
-      ansible.builtin.file:
-        src: ../conf-available/0_localhost.conf
-        dest: /etc/apache2/conf-enabled/0_localhost.conf
-        state: link
-      notify: Restart apache
-
 - name: Apache - Security configuration (RedHat)
   when: ansible_os_family == 'RedHat'
   block:
