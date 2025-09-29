@@ -1,0 +1,57 @@
+---
+
+- name: Apache - Create security configuration
+  ansible.builtin.template:
+    src: conf/security.conf.j2
+    dest: "{{ apache_conf_path }}/security.conf"
+    mode: "0644"
+  notify: Restart apache
+
+- name: Apache - Security configuration (Debian)
+  when: ansible_os_family == 'Debian'
+  block:
+    - name: Apache - Remove default page (Debian)
+      ansible.builtin.file:
+        path: /var/www/html/index.html
+        state: absent
+
+    - name: Apache - Remove default vhost (Debian)
+      ansible.builtin.file:
+        path: /etc/apache2/sites-enabled/000-default.conf
+        state: absent
+      notify: Restart apache
+
+    - name: Apache - Enable localhost configuration (Debian)
+      ansible.builtin.file:
+        src: ../conf-available/0_localhost.conf
+        dest: /etc/apache2/conf-enabled/0_localhost.conf
+        state: link
+      notify: Restart apache
+
+- name: Apache - Security configuration (RedHat)
+  when: ansible_os_family == 'RedHat'
+  block:
+    - name: Apache - Creation welcome vide (RedHat)
+      ansible.builtin.copy:
+        content: ""
+        dest: "{{ apache_conf_path }}/welcome.conf"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Apache - Creation autoindex vide (RedHat)
+      ansible.builtin.copy:
+        content: ""
+        dest: "{{ apache_conf_path }}/autoindex.conf"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Apache - Creation ssl.conf vide (RedHat)
+      ansible.builtin.copy:
+        content: ""
+        dest: "{{ apache_conf_path }}/ssl.conf"
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Restart apache

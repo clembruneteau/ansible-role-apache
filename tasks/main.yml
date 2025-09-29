@@ -5,6 +5,9 @@
 - name: Apache - Installation
   ansible.builtin.include_tasks: setup-{{ ansible_os_family }}.yml
 
+- name: Apache - Security Configuration
+  ansible.builtin.include_tasks: security-configuration.yml
+
 - name: Apache - Start and enable apache
   ansible.builtin.service:
     name: "{{ apache_service }}"

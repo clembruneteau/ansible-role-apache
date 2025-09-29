@@ -9,4 +9,4 @@ apache_enablerepo: epel
 apache_service: httpd
 
 # apache_vhosts_path: /etc/httpd/conf/vhosts
-# apache_conf_path: /etc/httpd/conf.d
+apache_conf_path: /etc/httpd/conf.d

@@ -1,0 +1,7 @@
+ServerSignature {{ apache_security_options.serversignature }}
+ServerTokens {{ apache_security_options.servertokens }}
+TraceEnable {{ apache_security_options.traceenable }}
+
+<Directory /var/www/html>
+    Options -Indexes
+</Directory>
